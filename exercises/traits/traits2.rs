@@ -10,13 +10,15 @@
 // No boiler plate code this time,
 // you can do this!
 
-// I AM NOT DONE
-
 trait AppendBar {
     fn append_bar(self) -> Self;
 }
 
-//TODO: Add your code here
+impl AppendBar for Vec<String> {
+    fn append_bar(self) -> Self {
+        self.into_iter().chain(vec![String::from("Bar")].into_iter()).collect()
+    }
+}
 
 #[cfg(test)]
 mod tests {
