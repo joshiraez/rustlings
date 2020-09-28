@@ -33,10 +33,26 @@ impl Default for Person {
 // If while parsing the age, something goes wrong, then return the default of Person
 // Otherwise, then return an instantiated Person object with the results
 
-// I AM NOT DONE
-
 impl From<&str> for Person {
     fn from(s: &str) -> Person {
+        
+        if s.len() == 0 { return Default::default(); }
+
+        let split = s.split(",").collect::<Vec<&str>>();
+
+        if split.len() < 2 { return Default::default(); }
+
+        let name = split[0].to_owned();
+
+        if name.len() == 0 { return Default::default(); }
+
+        let ageSplitRes = split[1].parse::<usize>();
+
+        if ageSplitRes.is_err() { return Default::default(); }
+
+        let age = ageSplitRes.unwrap();
+        
+        Person{ name, age }
     }
 }
 
